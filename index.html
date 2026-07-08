@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Ferramenta didática para aula prática de megômetro no curso Técnico em Eletrotécnica." />
+  <title>Aula Prática de Megômetro | SENAI HUB</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero__content">
+      <img class="logo" src="assets/logo_senai_hub.webp" alt="Logo SENAI HUB" />
+      <div>
+        <span class="eyebrow">Curso Técnico em Eletrotécnica</span>
+        <h1>Aula Prática de Megômetro</h1>
+        <p class="hero__text">Registro de medições, checklist de segurança, roteiro prático e cálculo automático da resistência mínima de isolamento para motores, cabos e instalações de baixa tensão.</p>
+      </div>
+    </div>
+    <div class="hero__badges" aria-label="Recursos da ferramenta">
+      <span>NR-10</span>
+      <span>Checklist</span>
+      <span>Cálculo automático</span>
+      <span>Relatório</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="notice" id="alertaSeguranca">
+      <div>
+        <strong>Alerta de segurança:</strong> o ensaio com megômetro aplica tensão CC elevada. O circuito deve estar desenergizado, bloqueado, testado contra ausência de tensão e descarregado antes e depois da medição. Nunca aplique megômetro em CLP, IHM, inversor, sensores, eletrônicos ou equipamentos conectados sem isolamento prévio.
+      </div>
+      <button class="notice__btn" type="button" data-close-notice>Entendi</button>
+    </section>
+
+    <nav class="tabs" aria-label="Navegação principal">
+      <button class="tab active" type="button" data-tab="procedimento">Passo a passo</button>
+      <button class="tab" type="button" data-tab="medicao">Medições</button>
+      <button class="tab" type="button" data-tab="calculadora">Cálculos</button>
+      <button class="tab" type="button" data-tab="relatorio">Relatório</button>
+      <button class="tab" type="button" data-tab="quiz">Quiz rápido</button>
+    </nav>
+
+    <section class="panel active" id="procedimento">
+      <div class="grid grid--2">
+        <article class="card">
+          <div class="card__header">
+            <span class="icon">✓</span>
+            <div>
+              <h2>Checklist antes do ensaio</h2>
+              <p>Marque cada item durante a prática. A ferramenta calcula o progresso automaticamente.</p>
+            </div>
+          </div>
+          <div class="progress" aria-label="Progresso do checklist">
+            <div class="progress__bar" id="checkProgressBar"></div>
+            <span id="checkProgressText">0% concluído</span>
+          </div>
+          <div class="checklist" id="checklist"></div>
+        </article>
+
+        <article class="card card--blue">
+          <div class="card__header">
+            <span class="icon">⚡</span>
+            <div>
+              <h2>Roteiro prático do professor</h2>
+              <p>Sequência recomendada para conduzir a aula sem pular etapas críticas.</p>
+            </div>
+          </div>
+          <ol class="steps">
+            <li><strong>Contextualizar:</strong> explicar que o megômetro mede a resistência de isolamento entre condutor/massa, fase/fase ou enrolamento/carcaça.</li>
+            <li><strong>Selecionar o objeto:</strong> motor, cabo, quadro ou circuito de baixa tensão. Registrar tensão nominal, comprimento e tensão de ensaio.</li>
+            <li><strong>Desenergizar:</strong> abrir seccionamento, bloquear, etiquetar e confirmar ausência de tensão com instrumento adequado.</li>
+            <li><strong>Isolar eletrônicos:</strong> retirar inversor, CLP, IHM, sensores, fontes, DPS, lâmpadas LED e qualquer carga sensível do circuito.</li>
+            <li><strong>Descarregar capacitâncias:</strong> aterrar os condutores e aguardar antes de conectar o megômetro.</li>
+            <li><strong>Conectar pontas:</strong> ponta LINE no condutor/enrolamento e ponta EARTH na carcaça/PE. Para cabo, testar condutor contra PE e condutor contra condutor.</li>
+            <li><strong>Aplicar tensão:</strong> manter o teste por 60 segundos para leitura padrão. Quando solicitado, registrar 30 s, 1 min e 10 min.</li>
+            <li><strong>Descarregar novamente:</strong> ao finalizar, manter o circuito descarregado antes de tocar nos terminais.</li>
+            <li><strong>Interpretar:</strong> comparar menor resistência medida com o mínimo calculado e avaliar PI/DAR quando houver leitura temporal.</li>
+            <li><strong>Registrar:</strong> salvar relatório, observações, fotos externas se necessário e recomendações de manutenção.</li>
+          </ol>
+        </article>
+      </div>
+
+      <article class="card mt">
+        <h2>Guia rápido de tensão de ensaio</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Aplicação didática</th>
+                <th>Tensão comum do megômetro</th>
+                <th>Observação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Circuitos SELV/PELV ou comandos sensíveis isolados</td>
+                <td>250 Vcc</td>
+                <td>Somente quando o circuito estiver desconectado de eletrônicos.</td>
+              </tr>
+              <tr>
+                <td>Instalações e cabos BT até 500 V</td>
+                <td>500 Vcc</td>
+                <td>Valor didático mais comum para circuitos de baixa tensão.</td>
+              </tr>
+              <tr>
+                <td>Motores e circuitos BT acima de 500 V até 1 kV</td>
+                <td>1000 Vcc</td>
+                <td>Usar somente com o equipamento totalmente isolado de inversores e eletrônicos.</td>
+              </tr>
+              <tr>
+                <td>Equipamentos acima de 1 kV</td>
+                <td>2500 Vcc ou 5000 Vcc</td>
+                <td>Depende do procedimento, classe de isolação e autorização técnica.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+
+    <section class="panel" id="medicao">
+      <form class="card form" id="measurementForm">
+        <div class="card__header">
+          <span class="icon">🧪</span>
+          <div>
+            <h2>Dados da prática e medições</h2>
+            <p>Preencha os campos. Os cálculos e o parecer são atualizados automaticamente.</p>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <label>
+            Nome do aluno
+            <input type="text" id="studentName" placeholder="Ex.: Ana Silva" autocomplete="name" />
+          </label>
+          <label>
+            Turma
+            <input type="text" id="className" placeholder="Ex.: Técnico em Eletrotécnica" />
+          </label>
+          <label>
+            Professor / orientador
+            <input type="text" id="teacherName" value="Joelson M. Mendes" />
+          </label>
+          <label>
+            Data
+            <input type="date" id="testDate" />
+          </label>
+          <label>
+            Tipo de objeto ensaiado
+            <select id="assetType">
+              <option value="motor">Motor elétrico</option>
+              <option value="cabo">Cabo elétrico</option>
+              <option value="instalacao">Instalação / circuito BT</option>
+            </select>
+          </label>
+          <label>
+            Identificação do equipamento/circuito
+            <input type="text" id="assetId" placeholder="Ex.: Motor M1 / Cabo C1 / QD-01" />
+          </label>
+          <label>
+            Tensão nominal do objeto (V)
+            <input type="number" id="ratedVoltage" min="1" step="1" value="380" />
+          </label>
+          <label>
+            Tensão aplicada no megômetro (Vcc)
+            <select id="testVoltage">
+              <option>250</option>
+              <option selected>500</option>
+              <option>1000</option>
+              <option>2500</option>
+              <option>5000</option>
+            </select>
+          </label>
+          <label>
+            Comprimento do cabo/circuito (m)
+            <input type="number" id="cableLength" min="0" step="0.1" value="50" />
+          </label>
+          <label>
+            Temperatura ambiente (°C)
+            <input type="number" id="temperature" min="-10" max="80" step="0.1" value="30" />
+          </label>
+          <label>
+            Umidade relativa (%)
+            <input type="number" id="humidity" min="0" max="100" step="1" value="70" />
+          </label>
+          <label>
+            Estado visual
+            <select id="visualState">
+              <option>Limpo e seco</option>
+              <option>Com poeira</option>
+              <option>Com umidade</option>
+              <option>Com óleo/graxa</option>
+              <option>Com sinais de aquecimento</option>
+            </select>
+          </label>
+        </div>
+
+        <h3>Leituras de resistência de isolamento</h3>
+        <div class="form-grid form-grid--compact">
+          <label>
+            R 30 s (MΩ)
+            <input type="number" id="r30" min="0" step="0.01" placeholder="Opcional" />
+          </label>
+          <label>
+            R 60 s / 1 min (MΩ)
+            <input type="number" id="r60" min="0" step="0.01" placeholder="Ex.: 120" />
+          </label>
+          <label>
+            R 10 min (MΩ)
+            <input type="number" id="r10" min="0" step="0.01" placeholder="Opcional" />
+          </label>
+          <label>
+            Menor leitura adicional (MΩ)
+            <input type="number" id="extraMin" min="0" step="0.01" placeholder="Opcional" />
+          </label>
+        </div>
+
+        <h3>Leituras por ponto de teste</h3>
+        <div class="readings-grid">
+          <label>Fase A / U para PE ou carcaça <input type="number" id="phaseA" min="0" step="0.01" placeholder="MΩ" /></label>
+          <label>Fase B / V para PE ou carcaça <input type="number" id="phaseB" min="0" step="0.01" placeholder="MΩ" /></label>
+          <label>Fase C / W para PE ou carcaça <input type="number" id="phaseC" min="0" step="0.01" placeholder="MΩ" /></label>
+          <label>Fase-fase / condutor-condutor <input type="number" id="phasePhase" min="0" step="0.01" placeholder="MΩ" /></label>
+        </div>
+
+        <label class="full">
+          Observações do aluno
+          <textarea id="notes" rows="4" placeholder="Ex.: equipamento limpo, cabo desconectado, motor sem inversor, leitura estabilizou após 45 segundos..."></textarea>
+        </label>
+
+        <div class="actions">
+          <button type="button" class="btn btn--primary" id="calculateBtn">Calcular parecer</button>
+          <button type="button" class="btn" id="sampleBtn">Inserir exemplo</button>
+          <button type="reset" class="btn btn--ghost" id="resetBtn">Limpar formulário</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel" id="calculadora">
+      <div class="grid grid--2">
+        <article class="card result-card">
+          <div class="card__header">
+            <span class="icon">📊</span>
+            <div>
+              <h2>Resultado automático</h2>
+              <p>O parecer usa a menor leitura preenchida e o critério escolhido.</p>
+            </div>
+          </div>
+
+          <div class="score" id="scoreBox">
+            <span class="score__label">Parecer</span>
+            <strong id="statusText">Aguardando dados</strong>
+            <small id="statusHint">Preencha as medições para calcular.</small>
+          </div>
+
+          <div class="metrics">
+            <div><span>Menor medição</span><strong id="measuredMin">-- MΩ</strong></div>
+            <div><span>Valor corrigido p/ 40°C</span><strong id="correctedValue">-- MΩ</strong></div>
+            <div><span>Mínimo calculado</span><strong id="requiredMin">-- MΩ</strong></div>
+            <div><span>Margem</span><strong id="marginValue">--</strong></div>
+            <div><span>PI = R10min/R1min</span><strong id="piValue">--</strong></div>
+            <div><span>DAR = R60s/R30s</span><strong id="darValue">--</strong></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__header">
+            <span class="icon">ƒ</span>
+            <div>
+              <h2>Critérios e fórmulas</h2>
+              <p>Configure o critério que será usado na aula prática.</p>
+            </div>
+          </div>
+
+          <div class="formula-box">
+            <label>
+              Critério principal
+              <select id="criterion">
+                <option value="auto" selected>Automático pelo tipo de objeto</option>
+                <option value="motor_kv1">Motor: Rmín = kV + 1 MΩ</option>
+                <option value="motor_5">Motor BT moderno: mínimo didático 5 MΩ</option>
+                <option value="motor_100">Motor com bobina formada: referência 100 MΩ</option>
+                <option value="bt_1">Instalação/cabo BT: mínimo 1 MΩ</option>
+                <option value="cable_length">Cabo por comprimento: Rmín = MΩ·km ÷ km</option>
+                <option value="custom">Mínimo definido pelo professor</option>
+              </select>
+            </label>
+            <label>
+              Referência do cabo (MΩ·km)
+              <input type="number" id="cableReference" min="1" step="1" value="100" />
+            </label>
+            <label>
+              Mínimo definido pelo professor (MΩ)
+              <input type="number" id="customMin" min="0" step="0.01" value="1" />
+            </label>
+            <label class="toggle-line">
+              <input type="checkbox" id="useTempCorrection" />
+              Aplicar correção didática para 40°C
+            </label>
+          </div>
+
+          <div class="formula-note" id="formulaExplanation">
+            Selecione o tipo de objeto e preencha os dados para ver a fórmula aplicada.
+          </div>
+
+          <details class="details">
+            <summary>Ver explicação das fórmulas</summary>
+            <div class="details__content">
+              <p><strong>Motor — regra kV + 1:</strong> Rmín = tensão nominal em kV + 1 MΩ. Exemplo: motor 380 V → 0,38 + 1 = 1,38 MΩ.</p>
+              <p><strong>Motor BT moderno:</strong> para aula prática, use mínimo de 5 MΩ quando o professor quiser um critério mais conservador para máquinas de baixa tensão em bom estado.</p>
+              <p><strong>Cabo por comprimento:</strong> a resistência de isolamento diminui quando o comprimento aumenta. Fórmula didática: Rmín = referência em MΩ·km ÷ comprimento em km.</p>
+              <p><strong>Instalação BT:</strong> em circuitos de baixa tensão, o mínimo didático adotado aqui é 1 MΩ, podendo ser ajustado pelo professor conforme norma/procedimento interno.</p>
+              <p><strong>Correção para 40°C:</strong> R40 ≈ Rmedida × 2^((Temperatura − 40)/10). Use como aproximação didática; para laudo oficial, use tabela/procedimento aplicável.</p>
+            </div>
+          </details>
+        </article>
+      </div>
+
+      <article class="card mt">
+        <h2>Interpretação rápida</h2>
+        <div class="interpretation-grid">
+          <div class="mini-card good">
+            <strong>Aprovado</strong>
+            <span>Valor corrigido/medido ≥ mínimo calculado. Isolamento aceitável para a prática.</span>
+          </div>
+          <div class="mini-card warn">
+            <strong>Atenção</strong>
+            <span>Valor até 20% acima do mínimo. Repetir ensaio, verificar umidade, sujeira e conexões.</span>
+          </div>
+          <div class="mini-card bad">
+            <strong>Reprovado</strong>
+            <span>Valor abaixo do mínimo. Não energizar antes de investigar, secar, limpar ou reparar.</span>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="panel" id="relatorio">
+      <div class="grid grid--2">
+        <article class="card">
+          <div class="card__header">
+            <span class="icon">📝</span>
+            <div>
+              <h2>Relatório da prática</h2>
+              <p>Gere, salve, imprima ou exporte o registro da medição.</p>
+            </div>
+          </div>
+          <div class="actions actions--wrap">
+            <button type="button" class="btn btn--primary" id="saveReportBtn">Salvar relatório</button>
+            <button type="button" class="btn" id="printBtn">Imprimir / PDF</button>
+            <button type="button" class="btn" id="exportCsvBtn">Exportar CSV</button>
+            <button type="button" class="btn btn--ghost" id="clearHistoryBtn">Apagar histórico</button>
+          </div>
+          <div class="report-preview" id="reportPreview">
+            <p>Preencha as medições e clique em <strong>Salvar relatório</strong>.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card__header">
+            <span class="icon">📚</span>
+            <div>
+              <h2>Histórico salvo no navegador</h2>
+              <p>Os dados ficam neste computador/celular usando armazenamento local.</p>
+            </div>
+          </div>
+          <div class="history" id="historyList"></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel" id="quiz">
+      <article class="card">
+        <div class="card__header">
+          <span class="icon">🎯</span>
+          <div>
+            <h2>Quiz rápido de fixação</h2>
+            <p>Use ao final da prática para verificar se os alunos entenderam os pontos críticos.</p>
+          </div>
+        </div>
+        <div class="quiz" id="quizBox"></div>
+        <div class="quiz-result" id="quizResult"></div>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <img src="assets/logo_senai_hub.webp" alt="SENAI HUB" />
+    <div>
+      <strong>Ferramenta didática para aula prática de megômetro</strong>
+      <span>Desenvolvido por Joelson M. Mendes — Esp. em Energia e IoT</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
